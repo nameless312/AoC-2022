@@ -2,7 +2,6 @@ def read_input():
 	with open("input.txt") as fp:
 		fs = {}
 		fs["/"] = {"tp":"dir","children":dict(),"parent":dict(),"size":0}
-		curr_dir = ["/"]
 		curr_tree = fs["/"]
 		for i,line in enumerate(fp.readlines()):
 			if i != 0:
@@ -11,10 +10,8 @@ def read_input():
 					command = line.split(" ")
 					if command[1] == "cd":
 						if command[2] != "..":
-							curr_dir.append(command[2])
 							curr_tree = curr_tree.get("children")[command[2]]
 						else:
-							curr_dir.pop()
 							curr_tree = curr_tree.get("parent")
 				else:
 					if line.startswith("dir"):
